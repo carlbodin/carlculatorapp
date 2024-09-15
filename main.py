@@ -1,3 +1,6 @@
+from enum import Enum
+from math import sin, cos, tan, acos, sin, atan, pi, sqrt, e, radians
+
 from kivy.app import App
 from kivy.properties import ObjectProperty
 from kivy.uix.screenmanager import Screen, ScreenManager
@@ -10,7 +13,12 @@ from kivy.core.window import Window
 from kivy.lang import Builder
 from kivy.metrics import dp
 
-from math import sin, cos, tan, acos, sin, atan, pi, sqrt, e, radians
+
+class CalcState(Enum):
+    CLEAR = 0
+    EVALUATED = 1
+    EASTER = 2
+    ERROR = 3
 
 
 class CalcApp(App):
@@ -58,19 +66,24 @@ class Calculator():
                             'asin': 'asin(radians',
                             'atan': 'atan(radians',
                             }
+    state = CalcState.CLEAR.value
     
     def evaluate_expression(self, expression, rad_deg_mode):
         
-        # Handle empty evaluations
+        if self.state == 2 or self.state == 3 :  # Easter or Error
+            return expression
+
         if expression == "":
-            return ""      
+            self.state = CalcState.CLEAR.value
+            return ""
 
         # Replace visual for functional operators
         expression = self.replace_operators(expression, rad_deg_mode)
 
         # Handle easter eggs
         easter_reply = self.handle_easter_eggs(expression)
-        if easter_reply is not "":
+        if easter_reply != 1:
+            self.state = CalcState.EASTER.value
             return easter_reply
 
         # Close open parentheses
@@ -80,27 +93,31 @@ class Calculator():
         try:
             result = str(eval(expression))
         except ZeroDivisionError as e:
-            print(f'ZeroDivisionError: {e}.')
-            return 'Zero division is illegal'
+            self.state = CalcState.ERROR.value
+            # print(f'ZeroDivisionError: {e}.')
+            return 'Zero division'
         except SyntaxError as e:
-            print(f'SyntaxError: {e}.')
-            return 'Syntax Error'
+            # print(f'SyntaxError: {e}.')
+            return expression
         except:
-            print('Unknown error in exception handling of `evaluate_expression()`.')
+            self.state = CalcState.ERROR.value
+            # print('Unknown error in exception handling of `evaluate_expression()`.')
             return 'Error'
         
         # Round to max number of decimals
         try:
             result = str(round(float(result), self.decimals))
         except ValueError as e:
-            print(f'ValueError: {e}.')
+            self.state = CalcState.ERROR.value
+            # print(f'ValueError: {e}.')
             return 'Value Error'
 
-        # Convert float to int whERRORen x.0
+        # Convert float to int when x.0
         split_str = result.split('.')
         if split_str[-1] == '0':
             result = split_str[0]
         
+        self.state = CalcState.EVALUATED.value
         return result
     
     @staticmethod
@@ -116,12 +133,12 @@ class Calculator():
                 expression += ')'
         
         return expression
-        
+    
     @staticmethod
     def handle_easter_eggs(expression):
 
         if expression == "1337":
-            return "ELITE"
+            return "Elite"
         
         elif expression == "420":
             return "Blaze it"
@@ -136,32 +153,37 @@ class Calculator():
             return "Looks like the meaning of life"
         
         elif expression in ["80085", "58008", "5318008"]:
-            return "very mature..."
+            return "No."
         
         elif expression in ["35008"]:
-            return "Is it already 15:40?"
+            return "15:40 dags att fucka ur"
         
         elif expression in ["01134", "14"]:
-            return "Hey, how are you?"
+            return "Hey! How are you?"
         
         elif expression == "1+1":
-            return "You should know that"
+            return "You don't need me for that..."
         
-        elif expression == "You should know that":
-            return "3 :P"
-        
-        elif expression == "Syntax Error":
-            return "Error mannen"
-        
-        elif expression == "Error mannen":
-            return "CHILLA"
-        
-        return ""
+        return 1
 
+    def handle_numbers(self, input):
+        if self.state != CalcState.CLEAR.value:
+            self.state = CalcState.CLEAR.value
+            expression = ''
+        else:
+            expression = self.display.text
+        return expression + input
+    
     def handle_operators(self, operator):
         
+        if self.state == CalcState.EVALUATED.value:
+            self.state = CalcState.CLEAR.value
+
         # Get current expression in display
         expression = self.display.text
+        
+        if self.state == CalcState.EASTER.value:
+            return expression
 
         # Comparison cannot be made when label empty
         if expression == '':
@@ -172,11 +194,8 @@ class Calculator():
         # Replace operators
         elif expression[-1] in self.operators:
             expression = expression[:-1]
-        
-        # Standard case just adds the operator
-        expression += operator
 
-        return expression
+        return expression + operator
         
     def replace_operators(self, expression, rad_deg_mode):
 
@@ -191,6 +210,10 @@ class Calculator():
         return expression
     
     def backspace(self, expression):
+
+        if self.state != CalcState.CLEAR.value:
+            self.state = CalcState.CLEAR.value
+            return ''
         
         # Handle special case empty expression
         if expression == '':
@@ -206,6 +229,10 @@ class Calculator():
         
         # Ordinary remove latest character
         return expression[:-1]
+    
+    def all_clear(self):
+        self.state = CalcState.CLEAR.value
+        return ''
 
     def rad_deg_swap(self, current_mode):
 
@@ -295,7 +322,7 @@ class Menu(Screen):
 
     def popup_easter(self):
         content = BoxLayout(orientation='vertical', padding=dp(15), spacing=dp(15))
-        popup_label = Label(text="There are 10 easter eggs. Can you evaluate the right expressions?", 
+        popup_label = Label(text="There are 9 easter eggs. Can you find them by evaluating the right expressions?", 
                             font_size=dp(19), text_size=(dp(260), self.height), halign='center', valign='center',
                             size_hint_y=0.7)
         popup_button = Button(text='Ok', font_size=dp(20), pos_hint={'center_x': 0.5, 'center_y': 0.5}, size_hint=(None, None), size=(dp(150), dp(55)))
@@ -483,11 +510,7 @@ class SettingsHandler():
         self.sqrt_icon = 'images/sqrt_pink.png'
 
 if __name__ == '__main__':
-    # Moto g100, 9:21
-    # Window.size = (386, 900)
-    # Standard, 9:16
+    # Aspect 9:16
     # Window.size = (506, 900)
-
-    settings = SettingsHandler(file_name='settings.txt')
-
+    settings = SettingsHandler(file_name='settings')
     CalcApp().run()

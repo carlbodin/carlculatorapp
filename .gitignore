@@ -1,4 +1,3 @@
+.buildozer
+bin
 venv
-ideas
-buildozer.spec
-export

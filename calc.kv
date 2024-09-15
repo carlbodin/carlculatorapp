@@ -138,7 +138,7 @@
                         LargeRoundedButton:
                             text: '7'
                             color: root.settings.larger_button_font
-                            on_press: display.text += self.text
+                            on_press: display.text = root.handle_numbers(self.text)
                             canvas.before:
                                 Color:
                                     rgba: root.settings.larger_button if self.state == 'normal' else root.settings.larger_button_on_press
@@ -149,7 +149,7 @@
                         LargeRoundedButton:
                             text: '4'
                             color: root.settings.larger_button_font
-                            on_press: display.text += self.text
+                            on_press: display.text = root.handle_numbers(self.text)
                             canvas.before:
                                 Color:
                                     rgba: root.settings.larger_button if self.state == 'normal' else root.settings.larger_button_on_press
@@ -165,7 +165,7 @@
                         LargeRoundedButton:
                             text: '8'
                             color: root.settings.larger_button_font
-                            on_press: display.text += self.text
+                            on_press: display.text = root.handle_numbers(self.text)
                             canvas.before:
                                 Color:
                                     rgba: root.settings.larger_button if self.state == 'normal' else root.settings.larger_button_on_press
@@ -177,7 +177,7 @@
                         LargeRoundedButton:
                             text: '5'
                             color: root.settings.larger_button_font
-                            on_press: display.text += self.text
+                            on_press: display.text = root.handle_numbers(self.text)
                             canvas.before:
                                 Color:
                                     rgba: root.settings.larger_button if self.state == 'normal' else root.settings.larger_button_on_press
@@ -193,7 +193,7 @@
                         LargeRoundedButton:
                             text: '9'
                             color: root.settings.larger_button_font
-                            on_press: display.text += self.text
+                            on_press: display.text = root.handle_numbers(self.text)
                             canvas.before:
                                 Color:
                                     rgba: root.settings.larger_button if self.state == 'normal' else root.settings.larger_button_on_press
@@ -205,7 +205,7 @@
                         LargeRoundedButton:
                             text: '6'
                             color: root.settings.larger_button_font
-                            on_press: display.text += self.text
+                            on_press: display.text = root.handle_numbers(self.text)
                             canvas.before:
                                 Color:
                                     rgba: root.settings.larger_button if self.state == 'normal' else root.settings.larger_button_on_press
@@ -240,7 +240,7 @@
                         LargeRoundedButton:
                             text: '1'
                             color: root.settings.larger_button_font
-                            on_press: display.text += self.text
+                            on_press: display.text = root.handle_numbers(self.text)
                             canvas.before:
                                 Color:
                                     rgba: root.settings.larger_button if self.state == 'normal' else root.settings.larger_button_on_press
@@ -251,7 +251,7 @@
                         ACRoundedButton:
                             text: 'AC'
                             color: root.settings.larger_button_font
-                            on_press: display.text = ''
+                            on_press: display.text = root.all_clear()
                             canvas.before:
                                 Color:
                                     rgba: root.settings.ac_button if self.state == 'normal' else root.settings.ac_button_on_press
@@ -267,7 +267,7 @@
                         LargeRoundedButton:
                             text: '2'
                             color: root.settings.larger_button_font
-                            on_press: display.text += self.text
+                            on_press: display.text = root.handle_numbers(self.text)
                             canvas.before:
                                 Color:
                                     rgba: root.settings.larger_button if self.state == 'normal' else root.settings.larger_button_on_press
@@ -278,7 +278,7 @@
                         LargeRoundedButton:
                             text: '0'
                             color: root.settings.larger_button_font
-                            on_press: display.text += self.text
+                            on_press: display.text = root.handle_numbers(self.text)
                             canvas.before:
                                 Color:
                                     rgba: root.settings.larger_button if self.state == 'normal' else root.settings.larger_button_on_press
@@ -294,7 +294,7 @@
                         LargeRoundedButton:
                             text: '3'
                             color: root.settings.larger_button_font
-                            on_press: display.text += self.text
+                            on_press: display.text = root.handle_numbers(self.text)
                             canvas.before:
                                 Color:
                                     rgba: root.settings.larger_button if self.state == 'normal' else root.settings.larger_button_on_press
@@ -563,7 +563,7 @@
                 LargeRoundedButton:
                     text: '7'
                     color: root.settings.larger_button_font
-                    on_press: display.text += self.text
+                    on_press: display.text = root.handle_numbers(self.text)
                     canvas.before:
                         Color:
                             rgba: root.settings.larger_button if self.state == 'normal' else root.settings.larger_button_on_press
@@ -574,7 +574,7 @@
                 LargeRoundedButton:
                     text: '8'
                     color: root.settings.larger_button_font
-                    on_press: display.text += self.text
+                    on_press: display.text = root.handle_numbers(self.text)
                     canvas.before:
                         Color:
                             rgba: root.settings.larger_button if self.state == 'normal' else root.settings.larger_button_on_press
@@ -585,7 +585,7 @@
                 LargeRoundedButton:
                     text: '9'
                     color: root.settings.larger_button_font
-                    on_press: display.text += self.text
+                    on_press: display.text = root.handle_numbers(self.text)
                     canvas.before:
                         Color:
                             rgba: root.settings.larger_button if self.state == 'normal' else root.settings.larger_button_on_press
@@ -608,7 +608,7 @@
                 LargeRoundedButton:
                     text: '4'
                     color: root.settings.larger_button_font
-                    on_press: display.text += self.text
+                    on_press: display.text = root.handle_numbers(self.text)
                     canvas.before:
                         Color:
                             rgba: root.settings.larger_button if self.state == 'normal' else root.settings.larger_button_on_press
@@ -619,7 +619,7 @@
                 LargeRoundedButton:
                     text: '5'
                     color: root.settings.larger_button_font
-                    on_press: display.text += self.text
+                    on_press: display.text = root.handle_numbers(self.text)
                     canvas.before:
                         Color:
                             rgba: root.settings.larger_button if self.state == 'normal' else root.settings.larger_button_on_press
@@ -630,7 +630,7 @@
                 LargeRoundedButton:
                     text: '6'
                     color: root.settings.larger_button_font
-                    on_press: display.text += self.text
+                    on_press: display.text = root.handle_numbers(self.text)
                     canvas.before:
                         Color:
                             rgba: root.settings.larger_button if self.state == 'normal' else root.settings.larger_button_on_press
@@ -653,7 +653,7 @@
                 LargeRoundedButton:
                     text: '1'
                     color: root.settings.larger_button_font
-                    on_press: display.text += self.text
+                    on_press: display.text = root.handle_numbers(self.text)
                     canvas.before:
                         Color:
                             rgba: root.settings.larger_button if self.state == 'normal' else root.settings.larger_button_on_press
@@ -664,7 +664,7 @@
                 LargeRoundedButton:
                     text: '2'
                     color: root.settings.larger_button_font
-                    on_press: display.text += self.text
+                    on_press: display.text = root.handle_numbers(self.text)
                     canvas.before:
                         Color:
                             rgba: root.settings.larger_button if self.state == 'normal' else root.settings.larger_button_on_press
@@ -675,7 +675,7 @@
                 LargeRoundedButton:
                     text: '3'
                     color: root.settings.larger_button_font
-                    on_press: display.text += self.text
+                    on_press: display.text = root.handle_numbers(self.text)
                     canvas.before:
                         Color:
                             rgba: root.settings.larger_button if self.state == 'normal' else root.settings.larger_button_on_press
@@ -698,7 +698,7 @@
                 ACRoundedButton:
                     text: 'AC'
                     color: root.settings.ac_button_font
-                    on_press: display.text = ''
+                    on_press: display.text = root.all_clear()
                     canvas.before:
                         Color:
                             rgba: root.settings.ac_button if self.state == 'normal' else root.settings.ac_button_on_press
@@ -709,7 +709,7 @@
                 LargeRoundedButton:
                     text: '0'
                     color: root.settings.larger_button_font
-                    on_press: display.text += self.text
+                    on_press: display.text = root.handle_numbers(self.text)
                     canvas.before:
                         Color:
                             rgba: root.settings.larger_button if self.state == 'normal' else root.settings.larger_button_on_press
