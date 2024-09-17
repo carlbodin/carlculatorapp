@@ -1,3 +1,5 @@
+venv
+
+# Build cache and output
 .buildozer
 bin
-venv
