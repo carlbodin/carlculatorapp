@@ -73,7 +73,7 @@
                 spacing: dp(10)
                 size_hint_y: 0.16
                 LargeRoundedButton:
-                    text: '×'
+                    text: '\u00d7'
                     color: root.settings.larger_button_font
                     on_press: display.text = root.handle_operators(self.text)
                     font_size:dp(35)
@@ -85,7 +85,7 @@
                             size: self.size
                             radius: [dp(30)]
                 LargeRoundedButton:
-                    text: '÷'
+                    text: '\u00f7'
                     color: root.settings.larger_button_font
                     on_press: display.text = root.handle_operators(self.text)
                     font_size:dp(35)
@@ -404,7 +404,7 @@
                 spacing: dp(10)
 
                 SmallRoundedButton:
-                    text: 'π'
+                    text: '\u03c0'
                     color: root.settings.smaller_button_font
                     on_press: display.text += self.text
                     font_size: dp(27)
@@ -549,7 +549,7 @@
                         center: self.parent.center
                         size: (dp(75), dp(50))
                 LargeRoundedButton:
-                    text: '×'
+                    text: '\u00d7'
                     color: root.settings.larger_button_font
                     on_press: display.text = root.handle_operators(self.text)
                     canvas.before:
@@ -594,7 +594,7 @@
                             size: self.size
                             radius: [dp(30)]
                 LargeRoundedButton:
-                    text: '÷'
+                    text: '\u00f7'
                     color: root.settings.larger_button_font
                     on_press: display.text = root.handle_operators(self.text)
                     canvas.before:

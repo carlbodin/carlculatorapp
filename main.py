@@ -49,16 +49,16 @@ class CalcApp(App):
 class Calculator():
     display = ObjectProperty(None)
     decimals = 6
-    operators = ['+', '-', '*', '/', '×', '÷', '^']
-    replacement_dict_rad = {'^': '**', 
-                            '×': '*', 
-                            '÷': '/',
-                            'π': 'pi',
+    operators = ['+', '-', '*', '/', '\u00d7', '\u00f7', '^']
+    replacement_dict_rad = {'^': '**',
+                            '\u00d7': '*',
+                            '\u00f7': '/',
+                            '\u03c0': 'pi',
                             }
-    replacement_dict_deg = {'^': '**', 
-                            '×': '*', 
-                            '÷': '/',
-                            'π': 'pi',
+    replacement_dict_deg = {'^': '**',
+                            '\u00d7': '*',
+                            '\u00f7': '/',
+                            '\u03c0': 'pi',
                             'cos': 'cos(radians',
                             'sin': 'sin(radians',
                             'tan': 'tan(radians',
@@ -189,7 +189,7 @@ class Calculator():
         if expression == '':
             pass
         # Special rules for the minus sign
-        elif operator == '-' and (expression[-1] in ['*', '/', '×', '÷', '^']):
+        elif operator == '-' and (expression[-1] in ['*', '/', '\u00d7', '\u00f7', '^']):
             pass
         # Replace operators
         elif expression[-1] in self.operators:
@@ -322,7 +322,7 @@ class Menu(Screen):
 
     def popup_easter(self):
         content = BoxLayout(orientation='vertical', padding=dp(15), spacing=dp(15))
-        popup_label = Label(text="There are 9 easter eggs. Can you find them by evaluating the right expressions?", 
+        popup_label = Label(text="There are 9 easter eggs. Can you find them by evaluating the right numbers or expressions?",
                             font_size=dp(19), text_size=(dp(260), self.height), halign='center', valign='center',
                             size_hint_y=0.7)
         popup_button = Button(text='Ok', font_size=dp(20), pos_hint={'center_x': 0.5, 'center_y': 0.5}, size_hint=(None, None), size=(dp(150), dp(55)))
